@@ -21,3 +21,6 @@ Next steps(very important):
 - final result
 
 
+In progress: working at CSS generator. It would only make one file that contains all the data required to render "IMAGE" (XDXD)
+sorreh
+
