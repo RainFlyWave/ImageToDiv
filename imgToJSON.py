@@ -1,7 +1,7 @@
 from PIL import Image
 import json
 
-FILENAME = ''
+FILENAME = 'test_pic.jpg'
 im_main = Image.open(FILENAME, 'r')
 im = im_main.convert('RGB')
 width, height = im.size
