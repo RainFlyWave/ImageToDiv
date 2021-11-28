@@ -13,20 +13,35 @@ html_file = open(HTML_FILENAME, 'w')
 
 def generateStyles(data):
     """Generate <style> tag with classes for every <div>."""
-    html_file.write('</head>')         # close head tag
+    html_file.write('<style>')          # create <style> tag
+                                        # write styles to file
+    html_file.write('.flexDiv{display: flex;}\n')
+    image_data = data['imageData']              # assign image data to a variable to simpify usage
+    image_data_length = len(data['imageData'])  # sameeee bro lol
+    for i in range(image_data_length):          # ik you could just multiply HEIGHT and WIDTH but it's much cooler B)
+        html_file.write(f'.pixel{i}')
+        html_file.write('{background: '+ image_data[i]+';}\n')
+
+
+        
+    html_file.write('</style>')        # close </style> tag
+    html_file.write('</head>')         # close </head> tag
     pass
 
 def generateDivs(data):
     """Generate divs as cols and rows in existing HTML file."""
+
+    pixel_iterate = 0                   # a variable that stores our pixel number (simple helper)
     html_file.write('<body>')           # open <body> tag
 
-                                        # write styles to file
-    # for i in range(data['obraz']):  
-    print(len(data['imageData']))     
-        
+                                        # generate <div> tag with a class name
+    for i in range(HEIGHT):
+        html_file.write('<div class="flexDiv">\n')
+        for j in range(WIDTH):
+            html_file.write(f'<div class="pixel{pixel_iterate}"></div>\n')
+            pixel_iterate += 1
 
-
-
+        html_file.write('</div>\n')
     html_file.write("""
         </body>
     </html> 
