@@ -8,6 +8,8 @@ with open("package.json", encoding='utf-8', errors='ignore') as json_data:
 WIDTH = int(data['width'])              # assign WIDTH nad HEIGHT values
 HEIGHT = int(data['height'])
 HTML_FILENAME = 'test.html'             # customize html filename
+PIXEL_SCALE = 1
+
 
 html_file = open(HTML_FILENAME, 'w')
 
@@ -20,7 +22,7 @@ def generateStyles(data):
     image_data_length = len(data['imageData'])  # sameeee bro lol
     for i in range(image_data_length):          # ik you could just multiply HEIGHT and WIDTH but it's much cooler B)
         html_file.write(f'.pixel{i}')
-        html_file.write('{background: '+ image_data[i]+';}\n')
+        html_file.write('{background: '+ image_data[i]+f'; width: {PIXEL_SCALE}px; height: {PIXEL_SCALE}px;'+'}\n')
 
 
         
