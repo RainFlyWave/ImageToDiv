@@ -1,5 +1,13 @@
 import json
 
+    #######################################################
+    #######################################################
+    #######################################################
+    # to generate .json file, please run imgToJSON.py first!
+    #######################################################
+    #######################################################
+    #######################################################
+
     # load existing package.json file, parse JSON and save height and width
     # it's really important when it comes to rendering certain amoung of divs in cols and rows
 with open("package.json", encoding='utf-8', errors='ignore') as json_data:
@@ -7,11 +15,13 @@ with open("package.json", encoding='utf-8', errors='ignore') as json_data:
 
 WIDTH = int(data['width'])              # assign WIDTH nad HEIGHT values
 HEIGHT = int(data['height'])
+
 HTML_FILENAME = 'test.html'             # customize html filename
-PIXEL_SCALE = 1
+PIXEL_SCALE = 1                         # pixel scale: default 1. It means that the scale of image is 1:1                    
 
 
-html_file = open(HTML_FILENAME, 'w')
+
+html_file = open(HTML_FILENAME, 'w')    # file handler for our HTML file
 
 def generateStyles(data):
     """Generate <style> tag with classes for every <div>."""
@@ -20,8 +30,11 @@ def generateStyles(data):
     html_file.write('.flexDiv{display: flex;}\n')
     image_data = data['imageData']              # assign image data to a variable to simpify usage
     image_data_length = len(data['imageData'])  # sameeee bro lol
+
     for i in range(image_data_length):          # ik you could just multiply HEIGHT and WIDTH but it's much cooler B)
-        html_file.write(f'.pixel{i}')
+
+                                                # create pixel styling
+        html_file.write(f'.pixel{i}')           
         html_file.write('{background: '+ image_data[i]+f'; width: {PIXEL_SCALE}px; height: {PIXEL_SCALE}px;'+'}\n')
 
 
@@ -38,12 +51,13 @@ def generateDivs(data):
 
                                         # generate <div> tag with a class name
     for i in range(HEIGHT):
-        html_file.write('<div class="flexDiv">\n')
+        html_file.write('<div class="flexDiv">\n')      # generate <div> tag with class name of 'flexDiv'
+                                                        # you need that to add 'display: flex;' styling
         for j in range(WIDTH):
-            html_file.write(f'<div class="pixel{pixel_iterate}"></div>\n')
-            pixel_iterate += 1
+            html_file.write(f'<div class="pixel{pixel_iterate}"></div>\n')  # generate as many <div class='pixel'> as pixels in the picture
+            pixel_iterate += 1                          # increment out helper
 
-        html_file.write('</div>\n')
+        html_file.write('</div>\n')                     # close </div> tag
     html_file.write("""
         </body>
     </html> 
@@ -61,11 +75,10 @@ def createHTMLStruct(data):
     html_file.write(begin_structure)    # start HTML structure
     generateStyles(data)                # generate styles tag and close </head> tag
     generateDivs(data)                  # create <body></body> tag and writes div with classes into them
-
+                                        # close nescessary tags
                  
 
-
-createHTMLStruct(data)
+createHTMLStruct(data)      # run the func
 
 html_file.close()    # close the file
 
